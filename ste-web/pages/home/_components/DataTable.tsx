@@ -19,7 +19,7 @@ const DataTable = ({ reload }) => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3100/sample-entities`, {
+      const response = await axios.get(`${process.env.API_HOST}/sample-entities`, {
         params: {
           page: pagination.current,
           limit: pagination.pageSize,

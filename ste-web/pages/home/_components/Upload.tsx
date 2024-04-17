@@ -10,7 +10,7 @@ type Props = {
 const getProps = ({ onComplete }): UploadProps => {
   return {
     name: 'file',
-    action: 'http://127.0.0.1:3100/sample-entities/import_csv',
+    action: `${process.env.API_HOST}/sample-entities/import_csv`,
     headers: {
       authorization: 'authorization-text',
     },
