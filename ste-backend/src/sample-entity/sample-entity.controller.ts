@@ -21,15 +21,17 @@ export class SampleEntitiesController {
   constructor(private readonly sampleEntityService: SampleEntitiesService) {}
 
   @Post()
-  create(@Body() createSampleEntityDto: CreateSampleEntityInputDto): Promise<SampleEntity> {
+  create(
+    @Body() createSampleEntityDto: CreateSampleEntityInputDto,
+  ): Promise<SampleEntity> {
     return this.sampleEntityService.create(createSampleEntityDto);
   }
 
   @Get()
   findAllPaginated(
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
-    @Query('searchText') searchText: string,
+    @Query("page", new DefaultValuePipe(1), ParseIntPipe) page = 1,
+    @Query("limit", new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+    @Query("searchText") searchText: string,
   ): Promise<Pagination<SampleEntity>> {
     return this.sampleEntityService.paginate({ page, limit }, searchText);
   }

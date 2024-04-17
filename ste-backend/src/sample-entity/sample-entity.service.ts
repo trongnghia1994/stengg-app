@@ -3,8 +3,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { InsertResult, Repository } from "typeorm";
 import { CreateSampleEntityInputDto } from "./dto/create-sample-entity.dto";
 import { SampleEntity } from "./sample-entity.entity";
-import { IPaginationOptions, paginate, Pagination } from "nestjs-typeorm-paginate";
-const csv = require('csvtojson');
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from "nestjs-typeorm-paginate";
+const csv = require("csvtojson");
 
 @Injectable()
 export class SampleEntitiesService {
@@ -13,7 +17,9 @@ export class SampleEntitiesService {
     private readonly sampleEntityRepository: Repository<SampleEntity>,
   ) {}
 
-  create(createSampleEntity: CreateSampleEntityInputDto): Promise<SampleEntity> {
+  create(
+    createSampleEntity: CreateSampleEntityInputDto,
+  ): Promise<SampleEntity> {
     const sampleEntity = new SampleEntity();
     sampleEntity.id = createSampleEntity.id;
     sampleEntity.postId = createSampleEntity.postId;
@@ -28,16 +34,21 @@ export class SampleEntitiesService {
     await this.sampleEntityRepository.clear();
   }
 
-  bulkCreate(createSampleEntities: CreateSampleEntityInputDto[]): Promise<InsertResult> {
+  bulkCreate(
+    createSampleEntities: CreateSampleEntityInputDto[],
+  ): Promise<InsertResult> {
     return this.sampleEntityRepository.insert(createSampleEntities);
   }
 
-  async paginate(options: IPaginationOptions, searchText?: string): Promise<Pagination<SampleEntity>> {
-    const queryBuilder = this.sampleEntityRepository.createQueryBuilder('c')
+  async paginate(
+    options: IPaginationOptions,
+    searchText?: string,
+  ): Promise<Pagination<SampleEntity>> {
+    const queryBuilder = this.sampleEntityRepository.createQueryBuilder("c");
     if (searchText) {
-      queryBuilder.where('c.name like :text', { text: `%${searchText}%` })
+      queryBuilder.where("c.name like :text", { text: `%${searchText}%` });
     }
-    queryBuilder.orderBy('c.id', 'ASC');
+    queryBuilder.orderBy("c.id", "ASC");
     return paginate<SampleEntity>(queryBuilder, options);
   }
 
@@ -53,7 +64,9 @@ export class SampleEntitiesService {
     await this.sampleEntityRepository.delete(id);
   }
 
-  private async parseCsv(csvString: string): Promise<CreateSampleEntityInputDto[]> {
+  private async parseCsv(
+    csvString: string,
+  ): Promise<CreateSampleEntityInputDto[]> {
     const jsonArray = await csv().fromString(csvString);
     return jsonArray;
   }
