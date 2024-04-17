@@ -1,0 +1,30 @@
+{
+  "name": "stengg-upload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "scripts": {
+    "dependencies-init": "cd ste-backend && docker-compose up -d --build",
+    "start:dev:web": "npm --prefix ./ste-web run dev",
+    "start:dev:backend": "npm --prefix ./ste-backend run start:dev",
+    "start:dev": "npm-run-all -p start:dev:*",
+    "build:web": "npm --prefix ./ste-web run build",
+    "build:backend": "npm --prefix ./ste-backend run build",
+    "build": "npm-run-all -p build:*",
+    "lint": "npm  --prefix ./ste-backend run lint",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup:parent": "npm install",
+    "setup:web": "npm --prefix ./ste-web install",
+    "setup:backend": "npm --prefix ./ste-backend install",
+    "setup": "npm-run-all -s setup:*",
+    "backend-fmt": "cd ste-backend && npm run format",
+    "web-fmt": "cd ste-web && npm run lint:format",
+    "project-fmt": "npm run backend-fmt && npm run web-fmt"
+  },
+  "author": "",
+  "license": "ISC"
+}
