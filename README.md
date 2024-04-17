@@ -26,3 +26,7 @@
 - Prepare environment variables for ste-web: `cd ste-web; cp .env.example .env.local`
 
 - Start (at root): `npm start:dev` => The web app will be served at http://localhost:3000/home
+
+## Testing
+
+- Test the backend: `cd ste-backend; npm run test`. NOTE: Currently there're only 2 simple test cases
