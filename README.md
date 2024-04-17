@@ -23,6 +23,6 @@
 
 - Initialize and start dependencies (now only the DB): `npm run dependencies-init`
 
-- Prepare environment variables for ste-web: `cd ste-web; cp .sample-env .env.local`
+- Prepare environment variables for ste-web: `cd ste-web; cp .env.example .env.local`
 
 - Start (at root): `npm start:dev` => The web app will be served at http://localhost:3000/home
