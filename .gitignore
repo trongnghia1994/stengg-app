@@ -7,6 +7,8 @@
 /.vscode
 
 # misc
+.DS_Store
+*.pem
 npm-debug.log
 
 # tests
@@ -17,4 +19,5 @@ npm-debug.log
 # dist
 /dist
 
+# cache
 .eslintcache
